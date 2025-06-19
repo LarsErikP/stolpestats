@@ -22,8 +22,7 @@ api_instance = swagger_client.ActivitiesApi()
 # Configure OAuth2 access token for authorization: strava_oauth
 api_instance.api_client.configuration.access_token = env["STRAVA_ACCESS_TOKEN"]
 
-after = 1735686000 # Integer | An epoch timestamp to use for filtering activities that have taken place after a certain time. (optional)
-#after = 1750284000
+after = 1735686000 # Epoch time. Only fetch activities after this date. This value is 01.01.25 00:00:00
 page = 1 # Integer | Page number. Defaults to 1. (optional)
 perPage = 30 # Integer | Number of items per page. Defaults to 30. (optional) (default to 30)
 

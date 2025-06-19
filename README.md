@@ -7,3 +7,7 @@ An attempt to use Strava API to collect stats from activities related to Stolpej
 - Note the code from the callback
 - `curl -X POST https://www.strava.com/api/v3/oauth/token -d client_id=CLIENT_ID -d client_secret=CLIENT_SECRET -d code=CODE -d grant_type=authorization_code`
 - Note the returning token
+
+# TODO
+- Write some auth logic, and make use of the refresh_token functionality
+- More stats

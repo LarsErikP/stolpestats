@@ -11,7 +11,7 @@ You can
 - `curl -X POST https://www.strava.com/api/v3/oauth/token -d client_id=CLIENT_ID -d client_secret=CLIENT_SECRET -d code=CODE -d grant_type=authorization_code`
 - Note the returning tokens and expire_date
 
-Or maybe try step 1-3 (https://stravalib.readthedocs.io/en/stable/get-started/authenticate-with-strava.html|here)
+Or maybe try step 1-3 [here](https://stravalib.readthedocs.io/en/stable/get-started/authenticate-with-strava.html)
 - 
 
 # TODO

@@ -12,8 +12,7 @@ You can
 - Note the returning tokens and expire_date
 
 Or... 
-- Maybe try step 1-3 (https://stravalib.readthedocs.io/en/stable/get-started/authenticate-with-strava.html|here)
- 
+- Or maybe try step 1-3 [here](https://stravalib.readthedocs.io/en/stable/get-started/authenticate-with-strava.html)
 
 # TODO
 - More stats

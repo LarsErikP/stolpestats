@@ -68,8 +68,8 @@ mountain = closest_mountain(stolpeturer["total_elevation_gain"])
 print(f"Antall stolpeturer: {stolpeturer['count']}")
 print("Total stolpejaktlengde: {} km".format(m_to_km(stolpeturer["total_distance"])))
 print("Total antall høydemeter: {} m (Nærmeste fjelltopp nådd: {} - {}m)".format(stolpeturer["total_elevation_gain"],
-                                                                                mountain[0],
-                                                                                mountain[1],
+                                                                                 mountain[0],
+                                                                                 mountain[1],
                                                                                 )
      )
 print("Lengste tur: {} - {} ({} km)".format(stolpeturer["longest_trip"]["date"],

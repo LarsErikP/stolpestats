@@ -1,7 +1,7 @@
 # stolpestats
-An attempt to use Strava API to collect stats from activities related to Stolpejakten
+An attempt to use Strava API to collect stats from activities related to Stolpejakten. Everything depends on the fact that you put the word "stolpe" into your Strava Activities
 
-# Howto obtain the Strava Access Token
+## Howto obtain the Strava Access Token
 - Obtain your client ID and client secret from https://www.strava.com/settings/api
 - Do whatever you like to fetch the access_token, refresh_token and expires at:
 
@@ -14,5 +14,30 @@ You can
 Or... 
 - Or maybe try step 1-3 [here](https://stravalib.readthedocs.io/en/stable/get-started/authenticate-with-strava.html)
 
-# TODO
+## Store some secrets
+With the above data in hand, create `tokens.json`
+~~~
+{
+        "access_token": "<ACCESS_TOKEN>",
+        "refresh_token": "<REFRESH_TOKEN>",
+        "expires_at": <expire in epoch format>
+}
+~~~
+And `.env`
+~~~python
+STRAVA_CLIENT_ID='<CLIENT_ID>'
+STRAVA_CLIENT_SECRET='<CLIENT_SECRET>'
+~~~
+
+## Usage
+Clone repo and then
+~~~
+python3 -m venv env
+source env/bin/activate
+pip3 install -r requirements.txt
+python3 getStolpeStats.py
+~~~
+
+
+## TODO
 - More stats

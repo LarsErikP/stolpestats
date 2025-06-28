@@ -73,8 +73,8 @@ for activity in activities:
         if activity.average_speed > stolpeturer["fastest_trip"]["avg_speed"]:
             update_stat("fastest_trip", name, date, "avg_speed", activity.average_speed)
 
-        if activity.elapsed_time > stolpeturer["longest_time"]["seconds"]:
-            update_stat("longest_time", name, date, "seconds", activity.elapsed_time)
+        if activity.moving_time > stolpeturer["longest_time"]["seconds"]:
+            update_stat("longest_time", name, date, "seconds", activity.moving_time)
 
 mountain = closest_mountain(stolpeturer["total_elevation_gain"])
 

@@ -12,7 +12,8 @@ def mps_to_kmt(speed):
     return round(speed*3.6,1)
 
 def closest_mountain(target_height):
-    return min(fjell.items(), key=lambda item: abs(item[1] - target_height))
+    name, (num, height) = min(fjell.items(), key=lambda item: abs(item[1][1] - target_height))
+    return (name, num, height)
 
 # Global variables
 stolpeturer = { "count": 0, 
@@ -31,9 +32,10 @@ load_dotenv()
 with open('fjell.txt', newline='') as fjellfil:
     fjell_data = csv.reader(fjellfil, delimiter=';')
     for fjell_linje in fjell_data:
-        name = fjell_linje[0]
-        height = int(fjell_linje[1])
-        fjell[name] = height
+        num = fjell_linje[0]
+        name = fjell_linje[1]
+        height = int(fjell_linje[2])
+        fjell[name] = (num, height)
 
 with open('tokens.json', "r") as f:
     token_refresh = json.load(f)
@@ -67,9 +69,10 @@ mountain = closest_mountain(stolpeturer["total_elevation_gain"])
 # Printing stats
 print(f"Antall stolpeturer: {stolpeturer['count']}")
 print("Total stolpejaktlengde: {} km".format(m_to_km(stolpeturer["total_distance"])))
-print("Total antall høydemeter: {} m (Nærmeste fjelltopp nådd: {} - {}m)".format(stolpeturer["total_elevation_gain"],
+print("Total antall høydemeter: {} m (Nærmeste å ha nådd: {} - {}m - Norges {}. høyeste fjell)".format(stolpeturer["total_elevation_gain"],
                                                                                  mountain[0],
-                                                                                 mountain[1],
+                                                                                 mountain[2],
+                                                                                 mountain[1]
                                                                                 )
      )
 print("Lengste tur: {} - {} ({} km)".format(stolpeturer["longest_trip"]["date"],

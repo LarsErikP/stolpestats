@@ -76,11 +76,13 @@ for activity in activities:
         if activity.moving_time > stolpeturer["longest_time"]["seconds"]:
             update_stat("longest_time", name, date, "seconds", activity.moving_time)
 
+stolpeturer['total_elevation_gain'] = round(stolpeturer['total_elevation_gain'],1)
 mountain = closest_mountain(stolpeturer["total_elevation_gain"])
 
 # Printing stats
 print(f"Antall stolpeturer: {stolpeturer['count']}")
-print("Total stolpejaktlengde: {} km".format(m_to_km(stolpeturer["total_distance"])))
+print("Total stolpejaktlengde: {} km".format(m_to_km(stolpeturer['total_distance'])))
+print("Gjennomsnittelig lengde på tur: {} km".format(m_to_km(round(stolpeturer['total_distance']/stolpeturer['count'],2))))
 print("Total antall høydemeter: {} m (Nærmeste å ha nådd: {} - {}m - Norges {}. høyeste fjell)".format(stolpeturer["total_elevation_gain"],
                                                                                  mountain[0],
                                                                                  mountain[2],

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import json
 import csv
 from datetime import datetime, timedelta
@@ -12,8 +13,19 @@ def mps_to_kmt(speed):
     return round(speed*3.6,1)
 
 def print_duration(seconds):
-    h, m, s = str(timedelta(seconds=seconds)).split(':')
-    return "{} timer, {} minutter og {} sekunder".format(h,m,s)
+    td = timedelta(seconds=seconds)
+    h, m, s = str(td).split(':')
+    days = td.days
+    if days > 0:
+        h = h.split(',')[-1].strip()
+        if days == 1: 
+            day_text = "dag"
+        else:
+            day_text = "dager"
+        days_string = "{} {}, ".format(days, day_text)
+    else:
+        days_string = ""
+    return "{}{} timer, {} minutter og {} sekunder".format(days_string,h,m,s)
 
 def closest_mountain(target_height):
     name, (num, height) = min(fjell.items(), key=lambda item: abs(item[1][1] - target_height))
@@ -28,6 +40,7 @@ def update_stat(stat_name, name, date, data_field, data):
 stolpeturer = { "count": 0, 
                "total_distance": 0.0,
                "total_elevation_gain": 0.0,
+               "total_activity_time": 0,
                "longest_trip": { "distance": 0, "name": "", "date": "" },
                "fastest_trip": { "avg_speed": 0.0, "name": "", "date": "" },
                "longest_time": { "seconds" : 0, "name": "", "date": "" }
@@ -66,6 +79,7 @@ for activity in activities:
         stolpeturer["count"] += 1
         stolpeturer["total_distance"] += activity.distance
         stolpeturer["total_elevation_gain"] += activity.total_elevation_gain
+        stolpeturer["total_activity_time"] += activity.moving_time
 
         if activity.distance > stolpeturer["longest_trip"]["distance"]:
             update_stat("longest_trip", name, date, "distance", activity.distance)
@@ -84,15 +98,16 @@ print(f"Antall stolpeturer: {stolpeturer['count']}")
 print("Total stolpejaktlengde: {} km".format(m_to_km(stolpeturer['total_distance'])))
 print("Gjennomsnittelig lengde på tur: {} km".format(m_to_km(round(stolpeturer['total_distance']/stolpeturer['count'],2))))
 print("Total antall høydemeter: {} m (Nærmeste å ha nådd: {} - {}m - Norges {}. høyeste fjell)".format(stolpeturer["total_elevation_gain"],
-                                                                                 mountain[0],
-                                                                                 mountain[2],
-                                                                                 mountain[1]
-                                                                                )
+                                                                                                       mountain[0],
+                                                                                                       mountain[2],
+                                                                                                       mountain[1]
+                                                                                                      )
      )
+print("Total tid brukt: {}".format(print_duration(stolpeturer["total_activity_time"])))
 print("Lengste tur: {} - {} ({} km)".format(stolpeturer["longest_trip"]["date"],
                                             stolpeturer["longest_trip"]["name"],
                                             m_to_km(stolpeturer["longest_trip"]["distance"])
-                                            )
+                                           )
      )
 print("Lengst tid: {} - {} ({})".format(stolpeturer["longest_time"]["date"],
                                         stolpeturer["longest_time"]["name"],

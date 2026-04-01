@@ -25,7 +25,10 @@ def print_duration(seconds):
         days_string = "{} {}, ".format(days, day_text)
     else:
         days_string = ""
-    return "{}{} timer, {} minutter og {} sekunder".format(days_string,h,m,s)
+    h_string = "time"   if h == "01" else "timer"
+    m_string = "minutt" if m == "01" else "minutter"
+    s_string = "sekund" if s == "01" else "sekunder"
+    return "{}{} {}, {} {} og {} {}".format(days_string,h,h_string,m,m_string,s,s_string)
 
 def closest_mountain(target_height):
     name, (num, height) = min(fjell.items(), key=lambda item: abs(item[1][1] - target_height))
@@ -46,7 +49,7 @@ stolpeturer = { "count": 0,
                "longest_time": { "seconds" : 0, "name": "", "date": "" }
                }
 
-after = "2025-01-01"
+after = "2026-01-01"
 fjell = {}
 
 # Load some data from files
